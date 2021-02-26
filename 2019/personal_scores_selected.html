@@ -1,0 +1,122 @@
+<?php
+$file = __DIR__ . '/personal_scores.json';
+$json = file_get_contents($file);
+$file = __DIR__ . '/members.json';
+$members_json = file_get_contents($file);
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>M.LEAGUE | 2019 個人スコア 推移グラフ</title>
+	<link rel="icon" href="https://m-league.aja0.com/wp-content/uploads/2021/02/icon-150x150.png" sizes="32x32" />
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-324M0JYF26"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-324M0JYF26');
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+	<style type="text/css">
+		body { font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; }
+	</style>
+</head>
+<body>
+	<h2>M.LEAGUE 2019レギュラーシーズン 個人スコア推移グラフ</h2>
+<div align="center">
+<a href="https://px.a8.net/svt/ejp?a8mat=3B7FYA+35PXYA+4EKC+5ZEMP" rel="nofollow">
+<img border="0" width="320" height="50" alt="" src="https://www24.a8.net/svt/bgt?aid=200221570191&wid=007&eno=01&mid=s00000020550001005000&mc=1"></a>
+<img border="0" width="1" height="1" src="https://www18.a8.net/0.gif?a8mat=3B7FYA+35PXYA+4EKC+5ZEMP" alt="">
+</div>
+	<canvas id="my_chart">
+		Canvas not supported...
+	</canvas>
+	<h2>使い方</h2>
+	<p>凡例(選手名)をクリックすると、そのグラフを非表示にしたり、表示したりできます。</p>
+
+	<hr/>
+	<p><a href="https://naoya.aja0.com/m-league2019">Home</a></p>
+	<p>
+		<a href="https://twitter.com/naoya_bnk?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @naoya_bnk</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<a href="https://blogmura.com/ranking/in?p_cid=11092671" target="_blank"><img src="https://b.blogmura.com/88_31.gif" width="88" height="31" border="0" alt="ブログランキング・にほんブログ村へ" /></a>
+	</p>
+	<p>Copyright © M.LEAGUE まとめサイト All Rights Reserved.</p>
+	<script>
+		(function() {
+			'use strict';
+
+			var MEMBERS = '<?= $members_json; ?>';
+			var DATAS = '<?= $json; ?>';
+			var colors = [
+			'aqua','black','blue','brown','coral','crimson','fuchsia','gold','gray','green',
+			'indigo','lime','maroon','moccasin','navy','olive','orange','peru','pink','plum',
+			'purple','red','salmon','silver','slateBlue','tan','teal','turquoise','yellow'];
+
+			var members = $.parseJSON(MEMBERS);
+			var datas = $.parseJSON(DATAS);
+      var len = datas[0].length;
+			var labels = [...Array(len)].map((_, i) => i + 1);
+			var datasets = [];
+			for (var i = 0, j = 0; i < members.length; i++, j++) {
+				if (j >= colors.length) j = 0;
+				datasets.push({
+					label: members[i],
+					data: datas[i],
+					borderColor: colors[i],
+					fill: false,
+					lineTension: 0
+				});
+			}
+
+			var type = 'line';
+			var data = {
+				labels: labels,
+				datasets: datasets
+			};
+			var options = {
+				scales: {
+					xAxes: [{
+						scaleLabel: {
+							display: true,
+						  labelString: '回戦'
+						}
+					}],
+					yAxes: [{
+						ticks: {
+							suggestedMin: -400,
+							suggestedMax: 400,
+							stepSize: 100,
+							callback: function(value, index, values) {
+								return value + 'pt';
+							}
+						}
+					}]
+				},
+				// title: {
+				// 	display: true,
+				// 	text: '2019 M.LEAGUE チームポイント 推移グラフ',
+				// 	fontSize: 18,
+				// },
+				legend: {
+					display: true,
+						labels: {
+						boxWidth: 20
+					}
+				}
+			};
+			var ctx = document.getElementById('my_chart').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: type,
+				data: data,
+				options: options
+			});
+		})();
+	</script>
+</body>
+</html>

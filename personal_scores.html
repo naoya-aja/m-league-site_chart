@@ -27,7 +27,9 @@ $ranking = json_decode($ranking_json, true);
 	<meta name="description" content="麻雀プロリーグ戦「M.LEAGUE（Mリーグ）」非公式サイト。2020年シーズン成績。見やすいポイント推移グラフ。" />
 	<meta name="keywords" content="M.LEAGUE,Mリーグ,エムリーグ,麻雀,2020年シーズン,ポイント,グラフ,推移,チーム,個人,成績,2020" />
 
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/css/theme.ice.min.css" />
@@ -53,6 +55,54 @@ $ranking = json_decode($ranking_json, true);
 		  });
 		});
 	</script>
+	<style>
+		.ui-button:active, .ui-button.ui-state-active, .ui-button.ui-state-active:hover {
+			background-color:green;
+		}
+	</style>
+	<script>
+		$(function() {
+			$("#tachk").button();
+			$("#t0chk").button();
+			$("#t1chk").button();
+			$("#t2chk").button();
+			$("#t3chk").button();
+			$("#t4chk").button();
+			$("#t5chk").button();
+			$("#t6chk").button();
+			$("#t7chk").button();
+		});
+		function aupdate() {
+			var tachk = $("#tachk").prop("checked");
+			var ids = ["#t0chk", "#t1chk", "#t2chk", "#t3chk", "#t4chk", "#t5chk", "#t6chk", "#t7chk"];
+			ids.forEach(function(val) {
+				var chk = $(val).prop("checked");
+				if (tachk != chk) $(val).click();
+			});
+		}
+		function tupdate(ti) {
+			var ids = ["#t0chk", "#t1chk", "#t2chk", "#t3chk", "#t4chk", "#t5chk", "#t6chk", "#t7chk"];
+			var arr_tms = [
+				[0, 1, 2, 3],
+				[4, 5, 6],
+				[7, 8, 9, 10],
+				[11, 12, 13, 14],
+				[15, 16, 17, 18],
+				[19, 20, 21, 22],
+				[23, 24, 25],
+				[26, 27, 28, 29]
+			];
+			var id = ids[ti];
+			var chk = $(id).prop("checked");
+			var isDisplay = !chk;
+			myChart.legend.legendItems.forEach(function(label, key) {
+				if (!arr_tms[ti].includes(key)) return;
+				var meta = myChart.getDatasetMeta(key);
+				meta.hidden = isDisplay;
+				myChart.update();
+			});
+		}
+	</script>
 </head>
 <body>
 	<div align="center">
@@ -70,6 +120,18 @@ $ranking = json_decode($ranking_json, true);
 		<h2><a name="personal-graph">レギュラーシーズン、個人スコア推移グラフ</a></h2>
 	</div>
 
+	<div id="jquery-ui-button-checkbox" align="center">
+		<input type="checkbox" id="tachk" checked="checked" onclick='aupdate()' /><label for="tachk">全選択</label>
+		<input type="checkbox" id="t0chk" checked="checked" onclick='tupdate(0)' /><label for="t0chk">ドリブンズ</label>
+		<input type="checkbox" id="t1chk" checked="checked" onclick='tupdate(1)' /><label for="t1chk">風林火山</label>
+		<input type="checkbox" id="t2chk" checked="checked" onclick='tupdate(2)' /><label for="t2chk">サクラナイツ</label>
+		<input type="checkbox" id="t3chk" checked="checked" onclick='tupdate(3)' /><label for="t3chk">麻雀格闘倶楽部</label>
+		<input type="checkbox" id="t4chk" checked="checked" onclick='tupdate(4)' /><label for="t4chk">ABEMAS</label>
+		<input type="checkbox" id="t5chk" checked="checked" onclick='tupdate(5)' /><label for="t5chk">Pirates</label>
+		<input type="checkbox" id="t6chk" checked="checked" onclick='tupdate(6)' /><label for="t6chk">雷電</label>
+		<input type="checkbox" id="t7chk" checked="checked" onclick='tupdate(7)' /><label for="t7chk">PHOENIX</label>
+	</div>
+	<div style="clear:both;"></div>
 	<canvas id="my_chart">
 		Canvas not supported...
 	</canvas>
@@ -127,6 +189,7 @@ $ranking = json_decode($ranking_json, true);
 	</div>
 
 	<script>
+		var myChart;
 		(function() {
 			'use strict';
 
@@ -193,17 +256,11 @@ $ranking = json_decode($ranking_json, true);
 				}
 			};
 			var ctx = document.getElementById('my_chart').getContext('2d');
-			var myChart = new Chart(ctx, {
+			myChart = new Chart(ctx, {
 				type: type,
 				data: data,
 				options: options
 			});
-
-			// 初期非表示設定
-			// myChart.legend.legendItems.forEach(function(label, key) {
-			// 	myChart.legend.legendItems[key].hidden = true;
-			// 	myChart.data.datasets[key].hidden = true;
-			// });
 		})();
 	</script>
 </body>

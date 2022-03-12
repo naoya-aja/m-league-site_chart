@@ -1,0 +1,190 @@
+<?php
+$file = __DIR__ . '/semifinal_team_scores.json';
+$json = file_get_contents($file);
+$file = __DIR__ . '/semifinal_ranking_teams.json';
+$ranking_json = file_get_contents($file);
+$ranking = json_decode($ranking_json, true);
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-324M0JYF26"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-324M0JYF26');
+	</script>
+	<script data-ad-client="ca-pub-6615125710691999" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+	<meta charset="utf-8">
+	<title>M.LEAGUE | 2020 チームポイント 推移グラフ</title>
+	<link rel="icon" href="https://m-league.aja0.com/wp-content/uploads/2021/03/m-league-icon2-150x150.jpg" sizes="32x32" />
+	<meta name="description" content="麻雀プロリーグ戦「M.LEAGUE（Mリーグ）」非公式サイト。2020年シーズン成績。見やすいポイント推移グラフ。" />
+	<meta name="keywords" content="M.LEAGUE,Mリーグ,エムリーグ,麻雀,2020年シーズン,ポイント,グラフ,推移,チーム,個人,成績,2020" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/css/theme.ice.min.css" />
+	<style type="text/css">
+		body { font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; }
+	</style>
+	<style type="text/css">
+		.tablesorter-ice {
+			width: 90%;
+		}
+	</style>
+	<script type="text/javascript">
+		$(function() {
+			$("#teams_table").tablesorter({
+				headers: {
+					0: { sorter: false },
+					1: { sorter: false },
+					2: { sorter: false },
+					3: { sorter: false },
+					4: { sorter: false }
+				},
+				widgets: ['zebra']
+			});
+		});
+	</script>
+</head>
+<body>
+	<div align="center">
+		<h1><a href="/2020-season/">M.LEAGUE 2020</a> セミファイナルシリーズ</h1>
+		<p>
+			・<a href="#team-graph" style="font-size: larger">チームポイント推移グラフ</a><br/>
+			・<a href="#team-ranking" style="font-size: larger">チームのランキング</a>
+		</p>
+		<a href="https://px.a8.net/svt/ejp?a8mat=3B7FYA+35PXYA+4EKC+5ZEMP" rel="nofollow">
+			<img border="0" width="320" height="50" alt="" src="https://www24.a8.net/svt/bgt?aid=200221570191&wid=007&eno=01&mid=s00000020550001005000&mc=1">
+		</a>
+		<img border="0" width="1" height="1" src="https://www18.a8.net/0.gif?a8mat=3B7FYA+35PXYA+4EKC+5ZEMP" alt="">
+	</div>
+	<div align="center">
+		<h2><a name="team-graph">セミファイナルシリーズ、チームポイント推移グラフ</a></h2>
+	</div>
+
+	<canvas id="my_chart">
+		Canvas not supported...
+	</canvas>
+
+	<div align="center">
+	<p>※使い方：凡例(チーム名)をクリックすると、そのグラフを非表示にしたり、表示したりできます。</p>
+
+	<h2><a name="team-ranking">セミファイナルシリーズ、チームのランキング</a></h2>
+	<table id="teams_table" class="tablesorter-ice" >
+		<thead>
+			<tr>
+				<th>順位</th>
+				<th>チーム</th>
+				<th>Pt</th>
+				<th>持越</th>
+				<th colspan="8">選手成績</th>
+			</tr>
+		</thead>
+		<tbody>
+<?php foreach ($ranking as $values):
+	$i = 0;
+?>
+			<tr>
+				<th><?php echo $values[$i++]; ?></th>
+				<td><?php echo $values[$i++]; ?></td>
+				<td align="right"><?php echo $values[$i++]; ?></td>
+				<td align="right"><?php echo $values[$i++]; ?></td>
+				<td><?php echo $values[$i++]; ?></td>
+				<td align="right"><?php echo $values[$i++]; ?></th>
+				<td><?php echo $values[$i++]; ?></td>
+				<td align="right"><?php echo $values[$i++]; ?></td>
+				<td><?php echo $values[$i++]; ?></td>
+				<td align="right"><?php echo $values[$i++]; ?></td>
+				<td><?php echo $values[$i++]; ?></th>
+				<td align="right"><?php echo $values[$i++]; ?></td>
+			</tr>
+
+<?php endforeach; ?>
+
+		</tbody>
+	</table>
+
+
+	<hr/>
+		<p><a href="/">Home</a></p>
+	<p>
+		<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-hashtags="Mリーグ" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<a href="https://blogmura.com/ranking/in?p_cid=11092671" target="_blank"><img src="https://b.blogmura.com/88_31.gif" width="88" height="31" border="0" alt="ブログランキング・にほんブログ村へ" /></a>
+	</p>
+	<p>Copyright © M.LEAGUE まとめサイト All Rights Reserved.</p>
+	</div>
+
+	<script>
+		(function() {
+			'use strict';
+
+			var DATAS = '<?= $json; ?>';
+			var datas = $.parseJSON(DATAS);
+			var len = datas[0].length;
+			var teams = [
+				['ドリブンズ', '#8CAE27'],
+				['風林火山', 'black'],
+				['サクラナイツ', '#F47EA6'],
+				['麻雀格闘倶楽部', '#7F0002'],
+				['ABEMAS', '#BA9F5C'],
+				['雷電', '#D2A706'],
+			];
+			// var labels = [...Array(len)].map((_, i) => i + 1);
+			var labels = [...Array(len).keys()];
+			var datasets = [];
+			for (var i = 0; i < teams.length; i++) {
+				datasets.push({
+					label: teams[i][0],
+					data: datas[i],
+					borderColor: teams[i][1],
+					fill: false,
+					lineTension: 0
+				});
+			}
+
+			var type = 'line';
+			var data = {
+				labels: labels,
+				datasets: datasets
+			};
+			var options = {
+				scales: {
+					xAxes: [{
+						scaleLabel: {
+							display: true,
+						  labelString: '回戦'
+						}
+					}],
+					yAxes: [{
+						ticks: {
+							suggestedMin: -400,
+							suggestedMax: 400,
+							stepSize: 100,
+							callback: function(value, index, values) {
+								return value + 'pt';
+							}
+						}
+					}]
+				},
+				// title: {
+				// 	display: true,
+				// 	text: '2020 M.LEAGUE チームポイント 推移グラフ',
+				// 	fontSize: 18,
+				// },
+			};
+			var ctx = document.getElementById('my_chart').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: type,
+				data: data,
+				options: options
+			});
+		})();
+	</script>
+</body>
+</html>

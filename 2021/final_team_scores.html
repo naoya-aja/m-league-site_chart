@@ -20,10 +20,10 @@ $ranking = json_decode($ranking_json, true);
 	<script data-ad-client="ca-pub-6615125710691999" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 	<meta charset="utf-8">
-	<title>M.LEAGUE | 2020ファイナルシリーズ チームポイント 推移グラフ</title>
+	<title>M.LEAGUE | 2021ファイナルシリーズ チームポイント 推移グラフ</title>
 	<link rel="icon" href="https://m-league.aja0.com/wp-content/uploads/2021/03/m-league-icon2-150x150.jpg" sizes="32x32" />
-	<meta name="description" content="麻雀プロリーグ戦「M.LEAGUE（Mリーグ）」非公式サイト。2020年ファイナルシリーズ成績。見やすいポイント推移グラフ。" />
-	<meta name="keywords" content="M.LEAGUE,Mリーグ,エムリーグ,麻雀,2020年シーズン,ファイナルシリーズ,ポイント,グラフ,推移,チーム,個人,成績,2020" />
+	<meta name="description" content="麻雀プロリーグ戦「M.LEAGUE（Mリーグ）」非公式サイト。2021年ファイナルシリーズ成績。見やすいポイント推移グラフ。" />
+	<meta name="keywords" content="M.LEAGUE,Mリーグ,エムリーグ,麻雀,2021年シーズン,ファイナルシリーズ,ポイント,グラフ,推移,チーム,個人,成績,2021" />
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
@@ -54,7 +54,7 @@ $ranking = json_decode($ranking_json, true);
 </head>
 <body>
 	<div align="center">
-		<h1><a href="/2020-season/">M.LEAGUE 2020</a> ファイナルシリーズ</h1>
+		<h1><a href="/2021-season/">M.LEAGUE 2021</a> ファイナルシリーズ</h1>
 		<p>
 			・<a href="#team-graph" style="font-size: larger">チームポイント推移グラフ</a><br/>
 			・<a href="#team-ranking" style="font-size: larger">チームのランキング</a>
@@ -128,10 +128,10 @@ $ranking = json_decode($ranking_json, true);
 			var datas = $.parseJSON(DATAS);
 			var len = datas[0].length;
 			var teams = [
-				['ドリブンズ', '#8CAE27'],
-				['風林火山', 'black'],
 				['サクラナイツ', '#F47EA6'],
+				['麻雀格闘倶楽部', '#7F0002'],
 				['ABEMAS', '#BA9F5C'],
+				['PHOENIX', '#A63605'],
 			];
 			// var labels = [...Array(len)].map((_, i) => i + 1);
 			var labels = [...Array(len).keys()];
@@ -172,7 +172,7 @@ $ranking = json_decode($ranking_json, true);
 				},
 				// title: {
 				// 	display: true,
-				// 	text: '2020 M.LEAGUE チームポイント 推移グラフ',
+				// 	text: '2021 M.LEAGUE チームポイント 推移グラフ',
 				// 	fontSize: 18,
 				// },
 			};

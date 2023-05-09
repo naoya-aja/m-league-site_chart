@@ -1,7 +1,7 @@
 <?php
-$file = __DIR__ . '/regular_team_scores.json';
+$file = __DIR__ . '/semifinal_team_scores.json';
 $json = file_get_contents($file);
-$file = __DIR__ . '/regular_ranking_teams.json';
+$file = __DIR__ . '/semifinal_ranking_teams.json';
 $ranking_json = file_get_contents($file);
 $ranking = json_decode($ranking_json, true);
 ?>
@@ -20,7 +20,7 @@ $ranking = json_decode($ranking_json, true);
 	<script data-ad-client="ca-pub-6615125710691999" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 	<meta charset="utf-8">
-	<title>M.LEAGUE | 2022-23レギュラー チームポイント 推移グラフ</title>
+	<title>M.LEAGUE | 2022-23セミファイナル チームポイント 推移グラフ</title>
 	<link rel="icon" href="https://m-league.aja0.com/wp-content/uploads/2021/03/m-league-icon2-150x150.jpg" sizes="32x32" />
 	<meta name="description" content="麻雀プロリーグ戦「M.LEAGUE（Mリーグ）」非公式サイト。2022-23年シーズン成績。見やすいポイント推移グラフ。" />
 	<meta name="keywords" content="M.LEAGUE,Mリーグ,エムリーグ,麻雀,2022-23年シーズン,ポイント,グラフ,推移,チーム,個人,成績,2022-23" />
@@ -34,7 +34,7 @@ $ranking = json_decode($ranking_json, true);
 	</style>
 	<style type="text/css">
 		.tablesorter-ice {
-			width: 80%;
+			width: 90%;
 		}
 	</style>
 	<script type="text/javascript">
@@ -44,7 +44,8 @@ $ranking = json_decode($ranking_json, true);
 					0: { sorter: false },
 					1: { sorter: false },
 					2: { sorter: false },
-					3: { sorter: false }
+					3: { sorter: false },
+					4: { sorter: false }
 				},
 				widgets: ['zebra']
 			});
@@ -54,7 +55,7 @@ $ranking = json_decode($ranking_json, true);
 <body>
 	<div align="center">
 		<h1><a href="/">M.LEAGUE応援 まとめサイト</a></h1>
-		<h2><a href="/2022-season/">2022-23</a> レギュラーシーズン</h2>
+		<h2><a href="/2022-season/">2022-23</a> セミファイナルシリーズ</h2>
 		<a href="https://px.a8.net/svt/ejp?a8mat=3B7FYA+35PXYA+4EKC+5ZEMP" rel="nofollow">
 			<img border="0" width="320" height="50" alt="" src="https://www24.a8.net/svt/bgt?aid=200221570191&wid=007&eno=01&mid=s00000020550001005000&mc=1">
 		</a>
@@ -78,6 +79,7 @@ $ranking = json_decode($ranking_json, true);
 				<th>順位</th>
 				<th>チーム</th>
 				<th>Pt</th>
+				<th>持越</th>
 				<th colspan="8">選手成績</th>
 			</tr>
 		</thead>
@@ -88,6 +90,7 @@ $ranking = json_decode($ranking_json, true);
 			<tr>
 				<th><?php echo $values[$i++]; ?></th>
 				<td><?php echo $values[$i++]; ?></td>
+				<td align="right"><?php echo $values[$i++]; ?></td>
 				<td align="right"><?php echo $values[$i++]; ?></td>
 				<td><?php echo $values[$i++]; ?></td>
 				<td align="right"><?php echo $values[$i++]; ?></th>
@@ -122,16 +125,15 @@ $ranking = json_decode($ranking_json, true);
 			var datas = $.parseJSON(DATAS);
 			var len = datas[0].length;
 			var teams = [
-				['ドリブンズ', '#8CAE27'],
 				['風林火山', 'black'],
 				['サクラナイツ', '#F47EA6'],
 				['麻雀格闘倶楽部', '#7F0002'],
 				['ABEMAS', '#BA9F5C'],
-				['PHOENIX', '#A63605'],
 				['雷電', '#D2A706'],
 				['Pirates', '#106DBC'],
 			];
-			var labels = [...Array(len)].map((_, i) => i + 1);
+			// var labels = [...Array(len)].map((_, i) => i + 1);
+			var labels = [...Array(len).keys()];
 			var datasets = [];
 			for (var i = 0; i < teams.length; i++) {
 				datasets.push({
@@ -158,7 +160,7 @@ $ranking = json_decode($ranking_json, true);
 					}],
 					yAxes: [{
 						ticks: {
-							suggestedMin: -400,
+							suggestedMin: -300,
 							suggestedMax: 400,
 							stepSize: 100,
 							callback: function(value, index, values) {
